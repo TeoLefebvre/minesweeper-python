@@ -28,6 +28,11 @@ while running:
     
     pygame.display.flip()
 
+    if game.started:
+        game.update_timer()
+
+    clock.tick(FPS)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -43,10 +48,3 @@ while running:
                         case = line[c]
                         if case.rect.collidepoint(event.pos):
                             game.quadrillage.click(event.button, l, c)
-
-    if game.started:
-        game.update_timer()
-    
-    print('test')
-
-    clock.tick(FPS)

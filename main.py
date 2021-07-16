@@ -46,7 +46,5 @@ while running:
 
     if game.started:
         game.update_timer()
-    
-    print('test')
 
     clock.tick(FPS)

@@ -1,4 +1,5 @@
 import pygame
+import json
 from game import Game
 from colors import *
 
@@ -9,20 +10,29 @@ FPS = 60
 
 pygame.display.set_caption('Démineur')
 pygame.display.set_icon(pygame.image.load('assets/flag.png'))
-width = 730
-height = 820
+
+settings_file = open("settings.json", "r")
+settings = json.load(settings_file)
+nl = settings["nb_lines"]
+nc = settings["nb_colons"]
+nb_bomb = settings["nb_bombs"]
+case_width = settings["largeur_case"]
+settings_file.close()
+
+width = nc*case_width + 20
+height = nl*case_width + 100
 screen = pygame.display.set_mode((width, height))
 
 background = pygame.draw.rect(screen, GREY, [0, 0, width, height])
 
 font = pygame.font.Font('assets/fonts/roboto-bold.ttf', 32)
-play_button_background = pygame.draw.rect(screen, LIGHT_GREY, [260, 10, 200, 60])
+play_button_background = pygame.draw.rect(screen, LIGHT_GREY, [width//2-100, 10, 200, 60])
 play_button_text = font.render('PLAY', 1, BLACK)
-screen.blit(play_button_text, [320, 23])
+screen.blit(play_button_text, [width//2 - 100 + 60, 23])
 
 running = True
 
-game = Game(screen)
+game = Game(screen, nl, nc, nb_bomb, case_width)
 
 while running:
     

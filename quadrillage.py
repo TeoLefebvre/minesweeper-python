@@ -5,7 +5,7 @@ from random import randint
 
 class Quadrillage:
 
-    def __init__(self, game, nc, nl, nb_bomb):
+    def __init__(self, game, nc, nl, nb_bomb, case_width):
         self.font = pygame.font.Font('assets/fonts/roboto-bold.ttf', 20)
         self.game = game
         self.x = 10
@@ -21,7 +21,7 @@ class Quadrillage:
         for l in range(nl):
             line = []
             for c in range(nc):
-                line.append(Case(game.screen, l, c, self.x, self.y))
+                line.append(Case(game.screen, l, c, self.x, self.y, case_width))
             self.cases.append(line)
         
         for i in range(self.nb_bomb):

@@ -5,17 +5,17 @@ from time import perf_counter
 
 class Game:
 
-    def __init__(self, screen):
+    def __init__(self, screen, nl, nc, nb_bomb, case_width):
 
         self.font = pygame.font.Font('assets/fonts/roboto-bold.ttf', 25)
         self.is_playing = True
-        self.nl = 23 # nb lignes
-        self.nc = 23 # nb colonne
+        self.nl = nl # nb lignes
+        self.nc = nc # nb colonne
         self.screen = screen
-        self.nb_bomb = 100
+        self.nb_bomb = nb_bomb
         self.current_bomb = self.nb_bomb
 
-        self.quadrillage = Quadrillage(self, self.nc, self.nl, self.nb_bomb)
+        self.quadrillage = Quadrillage(self, self.nc, self.nl, self.nb_bomb, case_width)
         self.update_bomb_counter(0)
 
         self.debut = 0
@@ -44,9 +44,10 @@ class Game:
         self.refresh_bomb_counter()
 
     def refresh_bomb_counter(self):
-        bomb_counter_background = pygame.draw.rect(self.screen, LIGHT_GREY, [140, 20, 60, 40])
+        x_play_button = self.screen.get_width()//2 - 100
+        bomb_counter_background = pygame.draw.rect(self.screen, LIGHT_GREY, [x_play_button - 80, 20, 60, 40])
         bomb_counter_text = self.font.render(f'{self.current_bomb}', 1, RED)
-        self.screen.blit(bomb_counter_text, [150, 25])
+        self.screen.blit(bomb_counter_text, [x_play_button - 70, 25])
 
     def reset_timer(self):
         self.fin = self.debut
@@ -57,9 +58,10 @@ class Game:
         self.refresh_timer()
     
     def refresh_timer(self):
-        timer_background = pygame.draw.rect(self.screen, LIGHT_GREY, [520, 20, 100, 40])
+        x_play_button = self.screen.get_width()//2 - 100
+        timer_background = pygame.draw.rect(self.screen, LIGHT_GREY, [x_play_button + 220, 20, 100, 40])
         timer_text = self.font.render(self.get_duree(), 1, RED)
-        self.screen.blit(timer_text, [530, 25])
+        self.screen.blit(timer_text, [x_play_button + 230, 25])
 
     def get_duree(self):
         return '{0:.1f}'.format(self.fin - self.debut)

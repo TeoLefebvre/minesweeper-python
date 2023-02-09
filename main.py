@@ -58,3 +58,8 @@ while running:
                         case = line[c]
                         if case.rect.collidepoint(event.pos):
                             game.quadrillage.click(event.button, l, c)
+
+    if game.started:
+        game.update_timer()
+
+    clock.tick(FPS)

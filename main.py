@@ -1,6 +1,6 @@
 import pygame
-import json
-from game import Game
+from json import load
+from src.game import Game
 from colors import *
 
 pygame.init()
@@ -12,7 +12,7 @@ pygame.display.set_caption('Démineur')
 pygame.display.set_icon(pygame.image.load('assets/flag.png'))
 
 settings_file = open("settings.json", "r")
-settings = json.load(settings_file)
+settings = load(settings_file)
 nl = settings["nb_lines"]
 nc = settings["nb_colons"]
 nb_bomb = settings["nb_bombs"]

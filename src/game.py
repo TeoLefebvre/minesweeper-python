@@ -1,6 +1,6 @@
 import pygame
-from quadrillage import Quadrillage
-from colors import *
+from .quadrillage import Quadrillage
+from .colors import *
 from time import perf_counter
 
 class Game:

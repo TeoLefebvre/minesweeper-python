@@ -1,6 +1,6 @@
 import pygame
-from colors import *
-from case import Case
+from .colors import *
+from .case import Case
 from random import randint
 
 class Quadrillage:

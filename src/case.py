@@ -1,5 +1,5 @@
 import pygame
-from colors import *
+from .colors import *
 
 class Case:
 

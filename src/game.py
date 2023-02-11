@@ -11,11 +11,12 @@ class Game:
         self.is_playing = True
         self.nl = nl # nb lignes
         self.nc = nc # nb colonne
+        self.case_width = case_width
         self.screen = screen
         self.nb_bomb = nb_bomb
         self.current_bomb = self.nb_bomb
 
-        self.quadrillage = Quadrillage(self, self.nc, self.nl, self.nb_bomb, case_width)
+        self.quadrillage = Quadrillage(self, self.nc, self.nl, self.nb_bomb, self.case_width)
         self.update_bomb_counter(0)
 
         self.debut = 0
@@ -28,7 +29,7 @@ class Game:
         self.debut = perf_counter()
 
     def reset(self):
-        self.quadrillage = Quadrillage(self, self.nc, self.nl, self.nb_bomb)
+        self.quadrillage = Quadrillage(self, self.nc, self.nl, self.nb_bomb, self.case_width)
         self.is_playing = True
         self.started = False
         self.current_bomb = self.nb_bomb

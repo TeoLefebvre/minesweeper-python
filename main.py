@@ -1,7 +1,7 @@
 import pygame
 from json import load
 from src.game import Game
-from colors import *
+from src.colors import *
 
 pygame.init()
 

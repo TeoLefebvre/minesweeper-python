@@ -6,9 +6,11 @@ This is an implementation in Python of the famous Minesweeper game using the Pyg
 
 If you don't know the game, you can visit [this link](https://en.wikipedia.org/wiki/Minesweeper_(video_game)).
 
+- To start the game, reveal a any square. 
 - To reveal a square, left-click on it.
 - To place a flag on a square that is not revealed, right-click on it.
 - To clear all unrevealed squares and unflaged squares next to a square that is already revealed and which has the rigth number of flags next to it, left-click on it.
+- To reset game and timer, click play button. 
 
 ## Installation, test, launch and customize
 
@@ -31,7 +33,7 @@ You can now test the game by executing script `main.py` using `python main.py`.
 
 ### Compile the game in one file
 
-To compile all the project in one file (as the file `minesweeper`), you can use `pyinstaller` module. To learn more about this module and sea documentaion, follow [this link](https://pyinstaller.org/en/stable/). Install it using `pip` in your virtual environment and use the following command to compile the project in one file : 
+To compile all the project in one file (as the file `minesweeper`), you can use `pyinstaller` module. To learn more about this module and see documentaion, follow [this link](https://pyinstaller.org/en/stable/). Install it using `pip` in your virtual environment and use the following command to compile the project in one file : 
 
 ```bash
 pyinstaller --name minesweeper \

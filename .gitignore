@@ -1,3 +1,8 @@
 __pycache__/
 exemple jeu
 env
+
+# pyinstaller's files and folders
+dist
+build
+demineur.spec

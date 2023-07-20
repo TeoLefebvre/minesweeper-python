@@ -3,7 +3,7 @@ from .colors import *
 from .case import Case
 from random import randint
 
-class Quadrillage:
+class Grid:
 
     def __init__(self, game, nc, nl, nb_bomb, case_width):
         self.font = pygame.font.Font('assets/fonts/roboto-bold.ttf', 20)

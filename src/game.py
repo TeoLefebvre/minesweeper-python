@@ -1,5 +1,5 @@
 import pygame
-from .quadrillage import Quadrillage
+from .grid import Grid
 from .colors import *
 from time import perf_counter
 
@@ -16,20 +16,20 @@ class Game:
         self.nb_bomb = nb_bomb
         self.current_bomb = self.nb_bomb
 
-        self.quadrillage = Quadrillage(self, self.nc, self.nl, self.nb_bomb, self.case_width)
+        self.grid = Grid(self, self.nc, self.nl, self.nb_bomb, self.case_width)
         self.update_bomb_counter(0)
 
-        self.debut = 0
-        self.fin = 0
+        self.begin = 0
+        self.end = 0
         self.refresh_timer()
         self.started = False
 
     def start(self):
         self.started = True
-        self.debut = perf_counter()
+        self.begin = perf_counter()
 
     def reset(self):
-        self.quadrillage = Quadrillage(self, self.nc, self.nl, self.nb_bomb, self.case_width)
+        self.grid = Grid(self, self.nc, self.nl, self.nb_bomb, self.case_width)
         self.is_playing = True
         self.started = False
         self.current_bomb = self.nb_bomb
@@ -51,11 +51,11 @@ class Game:
         self.screen.blit(bomb_counter_text, [x_play_button - 70, 25])
 
     def reset_timer(self):
-        self.fin = self.debut
+        self.end = self.begin
         self.refresh_timer()
 
     def update_timer(self):
-        self.fin = perf_counter()
+        self.end = perf_counter()
         self.refresh_timer()
     
     def refresh_timer(self):
@@ -65,4 +65,4 @@ class Game:
         self.screen.blit(timer_text, [x_play_button + 230, 25])
 
     def get_duree(self):
-        return '{0:.1f}'.format(self.fin - self.debut)
+        return '{0:.1f}'.format(self.end - self.begin)

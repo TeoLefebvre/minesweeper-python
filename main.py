@@ -8,7 +8,7 @@ pygame.init()
 clock = pygame.time.Clock()
 FPS = 60
 
-pygame.display.set_caption('Démineur')
+pygame.display.set_caption('Minesweeper')
 pygame.display.set_icon(pygame.image.load('assets/flag.png'))
 
 settings_file = open("settings.json", "r")
@@ -16,7 +16,7 @@ settings = load(settings_file)
 nl = settings["nb_lines"]
 nc = settings["nb_colons"]
 nb_bomb = settings["nb_bombs"]
-case_width = settings["largeur_case"]
+case_width = settings["case_width"]
 settings_file.close()
 
 width = nc*case_width + 20
@@ -44,14 +44,14 @@ while running:
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
-            print('Fermeture du jeu')
+            print('Game closed')
         if event.type == pygame.MOUSEBUTTONDOWN and (event.button == 1 or event.button == 3):
             if play_button_background.collidepoint(event.pos):
                 game.reset()
             elif game.is_playing:
-                for l in range(len(game.quadrillage.cases)):
-                    line = game.quadrillage.cases[l]
+                for l in range(len(game.grid.cases)):
+                    line = game.grid.cases[l]
                     for c in range(len(line)):
                         case = line[c]
                         if case.rect.collidepoint(event.pos):
-                            game.quadrillage.click(event.button, l, c)
+                            game.grid.click(event.button, l, c)

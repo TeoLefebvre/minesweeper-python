@@ -15,6 +15,7 @@ class Game:
         self.screen = screen
         self.nb_bomb = nb_bomb
         self.current_bomb = self.nb_bomb
+        self.case_width = case_width
 
         self.grid = Grid(self, self.nc, self.nl, self.nb_bomb, self.case_width)
         self.update_bomb_counter(0)

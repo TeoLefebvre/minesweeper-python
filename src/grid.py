@@ -6,7 +6,7 @@ from random import randint
 class Grid:
 
     def __init__(self, game, nc, nl, nb_bomb, case_width):
-        self.font = pygame.font.Font('assets/fonts/roboto-bold.ttf', 20)
+        self.font = pygame.font.Font('assets/fonts/roboto-bold.ttf', int(0.7*case_width))
         self.game = game
         self.x = 10
         self.y = 90
@@ -17,6 +17,7 @@ class Grid:
         self.nb_cases_to_reveal = self.nl * self.nc - self.nb_bomb
         self.nb_cases_revealed = 0
         self.loose = False
+        self.case_width = case_width
 
         for l in range(nl):
             line = []
@@ -65,9 +66,10 @@ class Grid:
         elif not case.revealed:
             case.draw(MIDDLE_GREY)
             flag = pygame.image.load('assets/flag.png')
+            flag = pygame.transform.scale(flag, (0.8*self.case_width, 0.8*self.case_width))
             flag_rect = flag.get_rect()
-            flag_rect.x = case.x
-            flag_rect.y = case.y
+            flag_rect.centerx = case.x + self.case_width // 2
+            flag_rect.centery = case.y + self.case_width // 2
             self.game.screen.blit(flag, flag_rect)
             self.game.update_bomb_counter(-1)
             case.flag = True
@@ -88,7 +90,10 @@ class Grid:
         else:
             number = self.font.render(str(nb), 1, BLACK)
 
-        self.game.screen.blit(number, [case.x + 9, case.y + 4])
+        number_rect = number.get_rect()
+        number_rect.centerx = case.x + self.case_width // 2
+        number_rect.centery = case.y + self.case_width // 2
+        self.game.screen.blit(number, number_rect)
 
     def reveal(self, case):
         if not case.revealed:
@@ -101,9 +106,10 @@ class Grid:
             case.draw(MIDDLE_GREY)
             if case.bomb:
                 bomb = pygame.image.load('assets/bomb.png')
+                bomb = pygame.transform.scale(bomb, (0.8*self.case_width, 0.8*self.case_width))
                 bomb_rect = bomb.get_rect()
-                bomb_rect.x = case.x
-                bomb_rect.y = case.y
+                bomb_rect.centerx = case.x + self.case_width // 2
+                bomb_rect.centery = case.y + self.case_width // 2
                 self.game.screen.blit(bomb, bomb_rect)
                 if not self.loose:
                     self.game_over()

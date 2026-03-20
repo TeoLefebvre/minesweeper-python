@@ -1,6 +1,7 @@
 __pycache__/
 exemple jeu
 env
+settings.json
 
 # pyinstaller's files and folders
 dist

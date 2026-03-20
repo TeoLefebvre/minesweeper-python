@@ -16,6 +16,7 @@ class Grid:
         self.nb_bomb = nb_bomb
         self.nb_cases_to_reveal = self.nl * self.nc - self.nb_bomb
         self.nb_cases_revealed = 0
+        self.win = False
         self.loose = False
         self.case_width = case_width
 
@@ -102,7 +103,8 @@ class Grid:
             if self.nb_cases_revealed == 1:
                 self.game.start()
             elif self.nb_cases_revealed == self.nb_cases_to_reveal:
-                self.game.game_over()
+                self.win = True
+                self.game_over()
             case.draw(MIDDLE_GREY)
             if case.bomb:
                 bomb = pygame.image.load('assets/bomb.png')
@@ -111,11 +113,11 @@ class Grid:
                 bomb_rect.centerx = case.x + self.case_width // 2
                 bomb_rect.centery = case.y + self.case_width // 2
                 self.game.screen.blit(bomb, bomb_rect)
-                if not self.loose:
-                    self.game_over()
+                self.loose = True
+                self.game_over()
             else:
                 nb_bomb = self.see_bomb(case)
-                if not nb_bomb == 0:
+                if nb_bomb > 0:
                     self.print_number(case, nb_bomb)
                 else:
                     neighbours = self.select_neighbours(case)
@@ -134,10 +136,12 @@ class Grid:
                         self.reveal(case)
 
     def game_over(self):
-        self.loose = True
         for l in self.cases:
             for c in l:
-                self.reveal(c)
+                if self.win and c.bomb and not c.flag: 
+                    self.right_click(c)
+                elif self.loose:
+                    self.reveal(c)
         self.game.game_over()
 
     def select_neighbours(self, case):
